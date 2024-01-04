@@ -1,12 +1,13 @@
 import React from "react";
-import { Modal, Navbar, RegisterModal } from "./components";
+import { Navbar, RegisterModal } from "./components";
+import { ToastContainer } from "react-toastify";
 
 
 function App() {
   return (
     <div className="">
+      <ToastContainer /> 
       <Navbar />
-      {/* <Modal isOpen onClose title="Hello World" actionLabel="Submit" /> */}
       <RegisterModal />
       <h1>come</h1>
       <h2>to</h2>
