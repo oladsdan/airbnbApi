@@ -4,8 +4,11 @@ import Container from '../Container'
 import { siteLogo } from '../../assets' 
 import Search from './Search'
 import UserMenu from './UserMenu'
+import Categories from './Categories'
 
-const Navbar = () => {
+const Navbar = ({currentUser}) => {
+  console.log("this is currentUser")
+  console.log(currentUser)
   return (
     <div className='w-full bg-white shadow-sm z-10'>
         <div className='py-4 border-b-[1px]'>
@@ -17,6 +20,7 @@ const Navbar = () => {
               </div>
             </Container>
         </div>
+        <Categories />
     </div>
   )
 }

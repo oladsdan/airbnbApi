@@ -4,3 +4,5 @@ export {default as Modal} from './Modals/Modal'
 export {default as Buttons} from './Buttons';
 export {default as RegisterModal} from './RegisterModal/registerModel'
 export {default as RegisterInputs} from './RegisterInputs'
+export {default as LoginModal} from './LoginModal/LoginModal'
+export {default as CategoryBox} from './CategoryBox'

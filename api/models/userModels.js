@@ -21,9 +21,7 @@ const userSchema = new mongoose.Schema({
         type: String
     },
     favoriteIds: { type: mongoose.Schema.Types.ObjectId},
-    accounts:  { type: mongoose.Schema.Types.ObjectId, ref:"Account" }, //this will be used for our social logins
-    
-    reservations :  { type: mongoose.Schema.Types.ObjectId, ref:"Reservations"} 
+    refreshToken: String,
 
 
 }, {timestamps: true})

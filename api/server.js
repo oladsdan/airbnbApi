@@ -3,6 +3,10 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
+import authRoutes from './routes/authRoutes.js';
+import cors from 'cors';
+import corsOptions from './config/corsOptions.js'
+import credentials from "./middlewares/credentials.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
@@ -11,6 +15,9 @@ const app = express()
 
 //middlewares for json
 //built in middleware to enable urlencoded data
+app.use(credentials)
+app.use(cors(corsOptions));
+
 app.use(morgan("dev"))
 app.use(express.urlencoded({ extended: false}))
 app.use(cookieParser());
@@ -18,13 +25,11 @@ app.use(cookieParser());
 //built-in middleware for json
 app.use(express.json())
 
-
+//the routes for use
+app.use('/api', authRoutes)
 
 //we set the connection
-mongoose.connect(process.env.MONGO_Url_Connect, {
-    useNewUrlParser:true,
-    useUnifiedTopology: true
-}).then(() => {
+mongoose.connect(process.env.MONGO_Url_Connect).then(() => {
     app.listen(PORT, () => console.log(`server running on Port ${PORT} and connected to mongoCluster`))
 }).catch((error) => console.log(`${error} try again later`))
 

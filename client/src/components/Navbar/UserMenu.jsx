@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {AiOutlineMenu} from 'react-icons/ai';
 import Avatar from '../Avatar';
 import MenuItem from './MenuItem';
 import useRegisterModal from '../../hooks/useRegisterModal';
+import useLoginModal from '../../hooks/useLoginModal';
+import AuthContext from '../../context/AuthProvider';
 
 
 const UserMenu = () => {
+    const {authUser, setAuthUser, setOpenLogin} = useContext(AuthContext)
+    console.log("in UserMenu", authUser)
+
+
     const [isOpen, setIsOpen] = useState(false)
     const registerModal = useRegisterModal();
+    const loginModal = useLoginModal();
 
     // const toggleOpen = useCallback(() => {
     //     setIsOpen((value) => !value)
@@ -20,6 +27,12 @@ const UserMenu = () => {
             registerModal.onOpen()
         }
 
+    }
+    const handleLogout = () => {
+        setAuthUser('')
+    }
+    const handleLogin =() => {
+        setOpenLogin(true)
     }
 
   return ( 
@@ -44,10 +57,23 @@ const UserMenu = () => {
         {isOpen && (
             <div className='absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm'>
                 <div className='flex flex-col cursor-pointer'>
-                    <>
-                        <MenuItem onClickMenu={""}  label="Login"/>
-                        <MenuItem  onClickMenu={registerModal.onOpen} setIsOpen={setIsOpen}   label="Sign up"/>
-                    </>
+                    {authUser?.user ? (
+                       <>
+                            <MenuItem onClickMenu={()=>{}} setIsOpen={setIsOpen}  label="My trips"/>
+                            <MenuItem  onClickMenu={()=>{}} setIsOpen={setIsOpen}   label="My favourites"/>
+                            <MenuItem  onClickMenu={()=>{}} setIsOpen={setIsOpen}   label="My  reservations"/>
+                            <MenuItem  onClickMenu={()=>{}} setIsOpen={setIsOpen}   label="My properties"/>
+                            <MenuItem  onClickMenu={()=>{}} setIsOpen={setIsOpen}   label="My Airbnb my home"/>
+                            <hr />
+                            <MenuItem  onClickMenu={handleLogout} setIsOpen={setIsOpen}   label="Logout"/>
+                         </>
+                    ): (
+
+                        <>
+                            <MenuItem onClickMenu={loginModal.onOpen} setIsOpen={setIsOpen} setOpenLogin={setOpenLogin(true)} label="Login"/>
+                            <MenuItem  onClickMenu={registerModal.onOpen} setIsOpen={setIsOpen}   label="Sign up"/>
+                        </>
+                    )}
                 </div>
 
             </div>

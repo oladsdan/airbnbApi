@@ -1,9 +1,10 @@
 import React from 'react'
 
-const MenuItem = ({onClickMenu, label, setIsOpen}) => {
+const MenuItem = ({onClickMenu, label, setIsOpen, setOpenLogin}) => {
      const handleMenuItem =() => {
         onClickMenu();
         setIsOpen(false)
+        // setOpenLogin()
 
     }
 
