@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import {useSearchParams, useNavigate} from 'react-router-dom'
+import {useSearchParams} from 'react-router-dom'
 import qs from 'query-string'
 
 
@@ -27,16 +27,15 @@ const CategoryBox = ({Icon, label, description, selected}) => {
     }
 
 
-  }, [label, searchParams])
+  }, [label, searchParams, setSearchParams])
 
   
 
 
   return (
-    // ${selected ? 'border-b-neutral-800 text-neutral-800': 'border-transparent text-neutral-500'}
     <div
         onClick={handleClick}
-        className={`flex flex-col items-center justify-center gap-2 p-3 border-b-2 hover:text-neutral-800 transiton cursor-pointer `}>
+        className={`flex flex-col items-center justify-center gap-2 p-3 border-b-2 hover:text-neutral-800 transiton cursor-pointer  ${selected ? 'border-b-neutral-800 text-neutral-800': 'border-transparent text-neutral-500'} `}>
         <Icon size={26} />
         <div className="font-medium text-sm">
             {label}
