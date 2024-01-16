@@ -12,9 +12,11 @@ import Buttons from '../Buttons';
 //import {AiFillGithub} from 'react-icons/ai
 import { FcGoogle } from 'react-icons/fc'
 import { BiLogoFacebook } from 'react-icons/bi';
+import useLoginModal from '../../hooks/useLoginModal';
 const registerModal = () => {
   /* eslint-disable */
   const registerModal = useRegisterModal(); 
+  const loginModal = useLoginModal()
   /* eslint-disable */
   const [isLoading, setIsLoading] = useState(false)
 
@@ -42,6 +44,11 @@ const registerModal = () => {
       .finally(() => {
         setIsLoading(false);
       })
+  }
+
+  const handleOpenLoginModal = () => {
+    loginModal.onOpen()
+    registerModal.onClose()
   }
 
  
@@ -98,7 +105,7 @@ const registerModal = () => {
       <div className='text-neutral-500 text-center mt-4 font-light'>
         <div className='flex items-center justify-center gap-2'>
           <span>Already have an account?</span>
-          <span onClick={registerModal.onClose} className='cursor-pointer underline'>Login</span>
+          <span onClick={handleOpenLoginModal} className='cursor-pointer underline'>Login</span>
         </div>
 
       </div>

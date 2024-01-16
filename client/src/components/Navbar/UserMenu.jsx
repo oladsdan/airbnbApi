@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import {AiOutlineMenu} from 'react-icons/ai';
 import Avatar from '../Avatar';
 import MenuItem from './MenuItem';
@@ -9,7 +9,7 @@ import AuthContext from '../../context/AuthProvider';
 
 const UserMenu = () => {
     const {authUser, setAuthUser, setOpenLogin} = useContext(AuthContext)
-    console.log("in UserMenu", authUser)
+   
 
 
     const [isOpen, setIsOpen] = useState(false)
@@ -35,10 +35,18 @@ const UserMenu = () => {
         setOpenLogin(true)
     }
 
+    // we use this as a form of authentication is the user is not signed in at the airbnb your home
+    const onRent = useCallback(() =>{
+        if(!authUser) {
+            return loginModal.onOpen()
+        }
+        //else open rent modal
+    }, [authUser, loginModal])
+
   return ( 
     <div className='relative'>
         <div className='flex flex-row items-center gap-3'>
-            <div onClick={() => {}}
+            <div onClick={onRent}
                 className='hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'>
                     Airbnb your home
 

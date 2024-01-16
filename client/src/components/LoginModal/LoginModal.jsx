@@ -29,7 +29,7 @@ const LoginModal = () => {
   //se set state for the user infor.
 
   const {authUser, setAuthUser, openLogin, setOpenLogin} = useContext(AuthContext);
-  console.log(authUser)
+  // console.log(authUser)
 
   // const { register, handleSubmit, formState: {errors,}} = useForm<FieldValues>({
   //   defaultValues: {
@@ -72,6 +72,11 @@ const LoginModal = () => {
           toast.error("invalid credentials")
         })
         
+    }
+
+    const handleRegisterSignup = () => {
+      loginModal.onClose()
+      registerModal.onOpen()
     }
 
  
@@ -120,7 +125,7 @@ const LoginModal = () => {
       <div className='text-neutral-500 text-center mt-4 font-light'>
         <div className='flex items-center justify-center gap-2'>
           <span>Don't have an Account</span>
-          <span onClick={registerModal.onClose} className='cursor-pointer underline'>SignUp</span>
+          <span onClick={handleRegisterSignup} className='cursor-pointer underline'>Create an Account</span>
         </div>
 
       </div>
