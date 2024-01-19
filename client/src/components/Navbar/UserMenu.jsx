@@ -5,16 +5,19 @@ import MenuItem from './MenuItem';
 import useRegisterModal from '../../hooks/useRegisterModal';
 import useLoginModal from '../../hooks/useLoginModal';
 import AuthContext from '../../context/AuthProvider';
+import useRentModal from '../../hooks/useRentModal';
 
 
 const UserMenu = () => {
-    const {authUser, setAuthUser, setOpenLogin} = useContext(AuthContext)
+    const {authUser, setAuthUser, openLogin, setOpenLogin} = useContext(AuthContext)
+    console.log(authUser)
    
 
 
     const [isOpen, setIsOpen] = useState(false)
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
+    const rentModal = useRentModal();
 
     // const toggleOpen = useCallback(() => {
     //     setIsOpen((value) => !value)
@@ -38,10 +41,12 @@ const UserMenu = () => {
     // we use this as a form of authentication is the user is not signed in at the airbnb your home
     const onRent = useCallback(() =>{
         if(!authUser) {
-            return loginModal.onOpen()
+            setOpenLogin(true)
+           return loginModal.onOpen()
         }
         //else open rent modal
-    }, [authUser, loginModal])
+        rentModal.onOpen()
+    }, [authUser, loginModal, rentModal])
 
   return ( 
     <div className='relative'>

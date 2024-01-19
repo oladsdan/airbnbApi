@@ -1,5 +1,5 @@
 import React from "react";
-import { LoginModal, Navbar, RegisterModal } from "./components";
+import { LoginModal, Navbar, RegisterModal, RentModal } from "./components";
 import { ToastContainer } from "react-toastify";
 import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -18,7 +18,8 @@ function App() {
         
           <ToastContainer /> 
           <RegisterModal />
-          <LoginModal />  
+          <LoginModal /> 
+          <RentModal /> 
           <Navbar/>
   
       </BrowserRouter>
