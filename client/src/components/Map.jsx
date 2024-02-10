@@ -1,9 +1,93 @@
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
+import L from 'leaflet'
+import "leaflet/dist/leaflet.css";
+import markerIcon2x  from  'leaflet/dist/images/marker-icon-2x.png'
+import markerIcon from "leaflet/dist/images/marker-icon.png"
+import markerShadow from "leaflet/dist/images/marker-shadow.png"
 
-const Map = () => {
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  iconRetinaurl: markerIcon2x,
+  showdowUrl: markerShadow
+})
+
+const Map = ({center}) => {
+
   return (
-    <div>Map</div>
+    <MapContainer
+      center={center}
+      zoom={13}
+      scrollWheelZoom={false}
+      className='h-[35vh] rounded-lg'
+    >
+      <TileLayer
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    />
+    {center && (
+      <Marker 
+        position={center}
+      />
+    )}
+
+    </MapContainer>
   )
 }
+
+
+// const Map = ({center}) => {
+//   console.log(center)
+//   const displayMap = useMemo(
+//     () => (
+//       <MapContainer
+//         center={center}
+//         zoom={13}
+//         scrollWheelZoom={false}
+//         >
+//         <TileLayer
+//           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+//           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+//         />
+//       </MapContainer>
+//     ),
+//     [center],
+//   )
+
+//   return (
+//     <div>
+//       {displayMap}
+//     </div>
+//   )
+// }
+
+
+// const Map =({center}) => {
+//   const displayMaps = useEffect(() => {
+//     console.log("it rendered")
+//     console.log(center)
+//     const displayMap =() => {(
+//         <MapContainer
+//           center={center}
+//           zoom={13}
+//           scrollWheelZoom={false}
+//           className='h-[35vh] rounded-lg'
+//         >
+//           <TileLayer
+//           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+//           />
+//       </MapContainer>
+//       )}
+
+//     }
+//     displayMap()
+//   }, [center])
+
+//   return (
+//     <div>{displayMaps}</div>
+//   )
+  
+  
+// }
 
 export default Map

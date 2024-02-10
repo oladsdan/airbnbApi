@@ -9,7 +9,7 @@ const listingSchema = new mongoose.Schema({
     roomCount: Number,
     bathroomCount: Number,
     guestCount: Number,
-    locationValue:String,
+    location:Object,
     userId:  { type: mongoose.Schema.Types.ObjectId, ref:"User" },
     price: Number
     

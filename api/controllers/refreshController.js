@@ -5,28 +5,37 @@ const handleRefreshToken = async (req, res) => {
     const cookies = req.cookies
     if (!cookies?.refreshToken) return res.sendStatus(401);
     const refreshToken = cookies.refreshToken;
+    console.log(refreshToken)
 
 
     //then we use it to find the user
-    const foundUser = await userModel.findOne({refreshToken : refreshToken}).exec()
-    if(!foundUser) return res.sendStatus(403);// forbidden
+     const foundUser = await userModel.find({refreshToken : refreshToken}).exec()
+     console.log(foundUser)
+     if(!foundUser) return res.sendStatus(403);// forbidden
+    
 
-    jwt.verity(
+    jwt.verify(
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET,
         (err, decoded) => {
             console.log(decoded)
-            if(err || foundUser._id !== decoded.id) return res.sendStatus(403);
+            console.log("This is foundUser")
+            console.log(foundUser)
+            console.log(foundUser?._id)
+            console.log(foundUser.name)
+            // if(err || JSON.stringify(foundUser._id) !== decoded.id) return res.sendStatus(403);
             
             // the we give a new accessToken
-            const accessToken = jwt.sign(
+            const Accesstoken = jwt.sign(
                 {
-                    "userid": existUser?._id,
+                    "userid": decoded.id,
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                {expiresIn: "10m"}
+                {expiresIn: "1m"}
             );
-            res.json({accessToken})
+            res.json({Accesstoken})
         }
     )
 }
+
+export default handleRefreshToken

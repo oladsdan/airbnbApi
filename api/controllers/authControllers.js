@@ -38,7 +38,6 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     const {email, password} = req.body;
     const lowerCaseEmail = email.toLowerCase()
-    console.log(lowerCaseEmail)
 
     if(!lowerCaseEmail || !password) return res.status(400).json("Username and password required")
 
@@ -57,7 +56,7 @@ export const login = async (req, res) => {
                     "userid": existUser?._id,
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                {expiresIn: "30m"}
+                {expiresIn: "1m"}
             )
             const refreshToken = await generateRefreshToken(existUser?._id);
         
@@ -67,7 +66,9 @@ export const login = async (req, res) => {
             
             const userInfor = {
                 "userId":existUser?._id,
-                "userName":existUser?.name
+                "userName":existUser?.name,
+                "favoriteIds":existUser?.favoriteIds
+                
             }
 
             //now we pass the refreshtoken as a cookie

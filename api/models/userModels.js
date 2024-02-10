@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
     image: {
         type: String
     },
-    favoriteIds: { type: mongoose.Schema.Types.ObjectId},
+    favoriteIds: [{ type: mongoose.Schema.Types.ObjectId, ref:"Listing"}],
     refreshToken: String,
 
 
