@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 const reservationSchema = new mongoose.Schema({
    userId:  { type: mongoose.Schema.Types.ObjectId, ref:"User" },
    listingId:  { type: mongoose.Schema.Types.ObjectId, ref:"Listing" },
+   owner: { type: mongoose.Schema.Types.ObjectId, ref:"User" },
    startDate: Date,
    endDate: Date,
    totalPrice: Number,

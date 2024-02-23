@@ -5,6 +5,10 @@ import axios from "axios";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import ListingPage from "./Pages/ListingPage/ListingPage";
+import Trips from "./Pages/Trips/trips";
+import ReservationsPage from "./Pages/ReservationsPage/ReservationsPage";
+import FavouritesPage from "./Pages/FavouritesPage/FavouritesPage";
+import PropertiesPage from "./Pages/PropertiesPage/PropertiesPage";
 
 
 
@@ -31,7 +35,11 @@ function App({children}) {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/listings/:listingId" element={<ListingPage />} />
-            </Routes>
+              <Route path="/trips" element={<Trips />} />
+              <Route path="/reservations" element={<ReservationsPage />} />
+              <Route path="/favorites" element={<FavouritesPage />} />
+              <Route path="/properties" element={<PropertiesPage />} />
+            </Routes> 
 
           </div>
 

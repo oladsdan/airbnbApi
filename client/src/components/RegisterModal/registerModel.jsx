@@ -20,7 +20,7 @@ const registerModal = () => {
   /* eslint-disable */
   const [isLoading, setIsLoading] = useState(false)
 
-  const { register, handleSubmit, formState: {errors}} = useForm();
+  const { register, handleSubmit, reset, formState: {errors}} = useForm();
 
   // const { register, handleSubmit, formState: {errors,}} = useForm<FieldValues>({
   //   defaultValues: {
@@ -36,6 +36,8 @@ const registerModal = () => {
     axios.post('/api/register', data)
       .then(() => {
         registerModal.onClose();
+        reset()
+        loginModal.onOpen();
         toast.success("Welcome on board")
       })
       .catch((error) => {

@@ -24,7 +24,7 @@ const LoginModal = () => {
   const loginModal = useLoginModal();
   /* eslint-disable */
   const [isLoading, setIsLoading] = useState(false)
-  const { register, handleSubmit, formState: {errors}} = useForm();
+  const { register, handleSubmit, reset, formState: {errors}} = useForm();
 
   //se set state for the user infor.
 
@@ -64,6 +64,7 @@ const LoginModal = () => {
             if({data}){
                 toast.success('Welcome Back');
                 setOpenLogin(!openLogin)
+                reset()
                 setAuthUser(data)
                 
                 

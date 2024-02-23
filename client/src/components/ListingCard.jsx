@@ -1,11 +1,16 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useCountries from '../hooks/useCountryHooks';
 import {format} from 'date-fns'
 import HeartButton from './HeartButton';
 import Buttons from './Buttons';
+import AuthContext from '../context/AuthProvider';
+
+
 
 const ListingCard = ({data, reservation, onAction, disabled, actionLabel, actionId, currentUser}) => {
+  const {setReservationReload} = useContext(AuthContext)
+
   const navigate = useNavigate();
   const {getByValue} = useCountries();
 
@@ -17,6 +22,7 @@ const ListingCard = ({data, reservation, onAction, disabled, actionLabel, action
       return;
     }
     onAction?.(actionId);
+    setReservationReload(prev => !prev)
   }, [onAction, actionId, disabled])
 
 

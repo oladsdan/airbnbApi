@@ -6,6 +6,7 @@ import morgan from "morgan";
 import authRoutes from './routes/authRoutes.js';
 import listingRoutes from './routes/listingRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import reservationRoutes from './routes/reservationRoutes.js'
 import cors from 'cors';
 import corsOptions from './config/corsOptions.js'
 import credentials from "./middlewares/credentials.js";
@@ -31,6 +32,7 @@ app.use(express.json())
 app.use('/api', authRoutes);
 app.use('/api-listing', listingRoutes);
 app.use('/users', userRoutes);
+app.use('/api-reservations', reservationRoutes);
 
 //we set the connection
 mongoose.connect(process.env.MONGO_Url_Connect).then(() => {

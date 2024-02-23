@@ -6,11 +6,13 @@ import useRegisterModal from '../../hooks/useRegisterModal';
 import useLoginModal from '../../hooks/useLoginModal';
 import AuthContext from '../../context/AuthProvider';
 import useRentModal from '../../hooks/useRentModal';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const UserMenu = () => {
     const {authUser, setAuthUser, openLogin, setOpenLogin} = useContext(AuthContext)
     console.log(authUser)
+    const navigate = useNavigate();
    
 
 
@@ -72,11 +74,15 @@ const UserMenu = () => {
                 <div className='flex flex-col cursor-pointer'>
                     {authUser?.user ? (
                        <>
-                            <MenuItem onClickMenu={()=>{}} setIsOpen={setIsOpen}  label="My trips"/>
-                            <MenuItem  onClickMenu={()=>{}} setIsOpen={setIsOpen}   label="My favourites"/>
-                            <MenuItem  onClickMenu={()=>{}} setIsOpen={setIsOpen}   label="My  reservations"/>
-                            <MenuItem  onClickMenu={()=>{}} setIsOpen={setIsOpen}   label="My properties"/>
-                            <MenuItem  onClickMenu={()=>{}} setIsOpen={setIsOpen}   label="My Airbnb my home"/>
+                            <Link to="/trips">
+                                <MenuItem onClickMenu={() => {}}  setIsOpen={setIsOpen}  label="My trips"/>
+                            </Link>
+
+
+                            <MenuItem  onClickMenu={()=>navigate("/favorites")} setIsOpen={setIsOpen}   label="My favourites"/>
+                            <MenuItem  onClickMenu={()=>navigate("/reservations")} setIsOpen={setIsOpen}   label="My  reservations"/>
+                            <MenuItem  onClickMenu={()=>navigate("/properties")} setIsOpen={setIsOpen}   label="My properties"/>
+                            <MenuItem  onClickMenu={()=> rentModal.onOpen()} setIsOpen={setIsOpen}   label="My Airbnb my home"/>
                             <hr />
                             <MenuItem  onClickMenu={handleLogout} setIsOpen={setIsOpen}   label="Logout"/>
                          </>
