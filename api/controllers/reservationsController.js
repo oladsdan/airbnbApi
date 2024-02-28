@@ -8,7 +8,6 @@ export const CreateReservation = async (req, res) => {
     const {startDate, endDate, listingId} = req.body;
     const newStartDate = new Date(startDate);
     const newEndDate = new Date(endDate);
-    console.log(newEndDate)
 
     try {
         if(!listingId || !startDate || !endDate) return res.satus(401).json("check the above some values missing")
@@ -41,10 +40,9 @@ export const getReservationByListingId =  async (req, res) => {
 
 export const getReservationByUserId =  async (req, res) => {
     const {_id} = req.user;
-    console.log(_id)
     // validateDBid(_id);
     const userId = _id.toString()
-    console.log("this is userId", userId)
+
 
     try{
         if(!userId) return res.sendStatus(404);

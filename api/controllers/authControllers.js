@@ -87,3 +87,19 @@ export const login = async (req, res) => {
         res.status(500).json({error:error.message})
     }
 }
+
+export const logout = async(req, res) => {
+    const cookie = req.cookies;
+    if(!cookie?.refreshToken) throw new Error("No Refresh Token in cookies");
+    const refreshToken = cookie.refreshToken;
+    const user = await userModel.findOne({ refreshToken});
+    if(!user) {
+        res.clearCookie("refreshToken", { httpOnly:true, secure:true})
+        return res.sendStatus(204); //forbidden
+    }
+    // const checkUser =await userModel.findOneAndUpdate(user, {refreshToken : ""})
+    user.refreshToken = "";
+    await user.save();
+    res.clearCookie("refreshToken", { httpOnly:true, secure:true})
+    return res.sendStatus(204)
+}

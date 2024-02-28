@@ -76,7 +76,7 @@ export const getFavoriteListings =  async (req, res) => {
 
         if(usersData){
             const {favoriteIds} = usersData;
-            // console.log(favoriteIds)
+            
            
             const listingResults =[]
             await Promise.all(
